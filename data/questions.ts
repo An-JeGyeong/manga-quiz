@@ -44,7 +44,7 @@ export const QUESTIONS: Question[] = [
     id: 2,
     stage: 'choosing',
     text: '표지 옆 한 줄 소개, 어떤 문구에 손이 멈출까?',
-    axis: ['world', 'relation'],
+    axis: ['intensity', 'world', 'relation'],
     answers: [
       { text: '"세계의 운명을 건 거대한 전투가 시작된다"', scores: { intensity: 2, world: 1 } },
       { text: '"낯선 세계, 새로운 동료들과의 모험"', scores: { world: 2, relation: 1 } },
@@ -70,7 +70,7 @@ export const QUESTIONS: Question[] = [
     id: 4,
     stage: 'firstEpisode',
     text: '1화 첫 장면, 주인공이 이렇게 등장하면 더 끌릴 것 같은 쪽은?',
-    axis: ['intensity', 'world'],
+    axis: ['intensity', 'world', 'relation'],
     answers: [
       { text: '강력한 적과 맞서며 강렬하게 등장', scores: { intensity: 2 } },
       { text: '새로운 세계에 발을 들이는 두근거리는 첫걸음', scores: { world: 2, intensity: 1 } },
@@ -82,7 +82,7 @@ export const QUESTIONS: Question[] = [
     id: 5,
     stage: 'firstEpisode',
     text: '주인공이 1화에서 처음 마주치는 인물, 어느 쪽이 더 흥미로울까?',
-    axis: ['relation'],
+    axis: ['intensity', 'relation'],
     answers: [
       { text: '거칠게 부딪히게 되는 라이벌', scores: { intensity: 2, relation: -1 } },
       { text: '앞으로 함께할 든든한 동료가 될 인물', scores: { relation: 2 } },
@@ -94,7 +94,7 @@ export const QUESTIONS: Question[] = [
     id: 6,
     stage: 'firstEpisode',
     text: '1화를 다 읽고 나서, 어떤 기분이 들면 계속 보고 싶어질까?',
-    axis: ['intensity', 'world'],
+    axis: ['intensity', 'relation', 'world'],
     answers: [
       { text: '"다음 화에 무슨 일이 벌어질지 심장이 뛴다"', scores: { intensity: 2 } },
       { text: '"이 인물들 관계가 앞으로 어떻게 될지 궁금하다"', scores: { relation: 2 } },
@@ -132,7 +132,7 @@ export const QUESTIONS: Question[] = [
     id: 9,
     stage: 'midpoint',
     text: '스토리 중간, 어떤 떡밥이 던져지면 더 두근거릴까?',
-    axis: ['world', 'relation'],
+    axis: ['intensity', 'world', 'relation'],
     answers: [
       { text: '"사실 이 세계엔 아무도 모르는 비밀이 있다"', scores: { world: 2 } },
       { text: '"이 능력엔 숨겨진 대가가 있다"', scores: { world: 1, intensity: 1 } },
