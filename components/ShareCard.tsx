@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import html2canvas from 'html2canvas'
 import type { ResultType } from '@/data/types'
 import { trackResultShare } from '@/lib/gtag'
+import { initKakao, shareToKakao } from '@/lib/kakao'
 
 declare global {
   interface Window {
@@ -51,10 +52,14 @@ export default function ShareCard({ resultType }: ShareCardProps) {
 
   function handleTossShare() {
     const share = window.toss?.share
-    if (share) {
-      share({ title: SHARE_TITLE, text: resultType.quote, url: shareUrl })
-    } else {
+    if (!share) {
       // 앱 밖에서 접근 시 fallback: 클립보드 복사
+      copyShareUrl()
+      return
+    }
+    try {
+      share({ title: SHARE_TITLE, text: resultType.quote, url: shareUrl })
+    } catch {
       copyShareUrl()
     }
   }
@@ -126,12 +131,15 @@ export default function ShareCard({ resultType }: ShareCardProps) {
         >
           토스로 공유하기
         </button>
-        {/* 카카오·인스타그램 공유 SDK 미연동 — 링크 복사로 폴백 */}
+        {/* 인스타그램 공유 SDK 미연동 — 링크 복사로 폴백 */}
         <button
           type="button"
           onClick={() => {
             trackResultShare('kakao')
-            copyShareUrl()
+            const shared = initKakao() && shareToKakao(resultType.name, resultType.quote, resultType.key)
+            if (!shared) {
+              copyShareUrl()
+            }
           }}
           className="rounded-2xl bg-[#FEE500] px-5 py-3 text-center text-sm font-semibold text-[#3C1E1E] transition-opacity hover:opacity-90"
         >

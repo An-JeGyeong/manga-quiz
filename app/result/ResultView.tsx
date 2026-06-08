@@ -43,25 +43,32 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
     <div
       onClick={() => trackWorkClick(work.title)}
-      className="flex flex-col gap-1 rounded-2xl border border-zinc-200 px-4 py-3"
+      className="flex gap-3 rounded-2xl border border-zinc-200 px-4 py-3"
     >
-      <div className="flex items-center justify-between gap-2">
-        <p className="font-semibold text-zinc-900">{work.title}</p>
-        <span className="shrink-0 rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-semibold text-[#D85A30]">
-          일치율 {matchRate(index)}%
-        </span>
-      </div>
-      <p className="text-sm text-zinc-500">{work.author}</p>
-      <p className="text-sm text-zinc-600">{work.reason}</p>
-      {work.tags && work.tags.length > 0 && (
-        <div className="mt-1 flex flex-wrap gap-1.5">
-          {work.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-medium text-[#D85A30]">
-              {tag}
-            </span>
-          ))}
+      {work.coverUrl && (
+        <div className="relative aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+          <Image src={work.coverUrl} alt={`${work.title} 표지`} fill sizes="64px" className="object-cover" />
         </div>
       )}
+      <div className="flex flex-1 flex-col gap-1">
+        <div className="flex items-center justify-between gap-2">
+          <p className="font-semibold text-zinc-900">{work.title}</p>
+          <span className="shrink-0 rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-semibold text-[#D85A30]">
+            일치율 {matchRate(index)}%
+          </span>
+        </div>
+        <p className="text-sm text-zinc-500">{work.author}</p>
+        <p className="text-sm text-zinc-600">{work.reason}</p>
+        {work.tags && work.tags.length > 0 && (
+          <div className="mt-1 flex flex-wrap gap-1.5">
+            {work.tags.map((tag) => (
+              <span key={tag} className="rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-medium text-[#D85A30]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
