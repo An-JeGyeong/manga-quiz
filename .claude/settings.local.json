@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(powershell -Command 'Get-Process -Name node -ErrorAction SilentlyContinue | Where-Object { \\(Get-NetTCPConnection -OwningProcess $_.Id -ErrorAction SilentlyContinue | Where-Object LocalPort -eq 3411\\) } | Stop-Process -Force')",
+      "Bash(pkill -f \"next dev -p 3411\")",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "PowerShell(Stop-Process *)",
+      "WebSearch",
+      "WebFetch(domain:myanimelist.net)",
+      "WebFetch(domain:api.jikan.moe)",
+      "Bash(curl *)",
+      "Bash(grep -o '.\\\\{0,5\\\\}일치율.\\\\{0,40\\\\}')"
+    ]
+  }
+}

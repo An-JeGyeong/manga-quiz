@@ -1,0 +1,13 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="manga 취향 테스트 OG 이미지 플레이스홀더">
+  <rect width="1200" height="630" fill="#D85A30" />
+  <g transform="translate(420 70) scale(3)">
+    <circle cx="60" cy="60" r="56" fill="#FAEEDA" />
+    <circle cx="60" cy="66" r="40" fill="#FFFFFF" />
+    <circle cx="46" cy="62" r="6" fill="#712B13" />
+    <circle cx="74" cy="62" r="6" fill="#712B13" />
+    <path d="M48 80 Q60 90 72 80" stroke="#D85A30" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M40 44 Q46 36 54 40" stroke="#D85A30" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M80 44 Q74 36 66 40" stroke="#D85A30" stroke-width="4" stroke-linecap="round" fill="none" />
+  </g>
+  <text x="600" y="560" text-anchor="middle" font-family="'Pretendard', 'Apple SD Gothic Neo', sans-serif" font-size="64" font-weight="700" fill="#FFFFFF">manga 취향 테스트</text>
+</svg>

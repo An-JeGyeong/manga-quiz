@@ -1,0 +1,19 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "no-console": "error",
+    "no-restricted-globals": [
+      "error",
+      { "name": "localStorage", "message": "앱인토스 WebView 정책: localStorage 금지. 클라이언트 state 사용." },
+      { "name": "sessionStorage", "message": "앱인토스 WebView 정책: sessionStorage 금지." }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='router'][callee.property.name='back']",
+        "message": "router.back() 금지. window.history.go(-1) 사용."
+      }
+    ]
+  }
+}
