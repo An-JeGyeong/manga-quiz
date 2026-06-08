@@ -29,3 +29,7 @@ export function trackResultShare(shareMethod: string) {
 export function trackWorkClick(workTitle: string) {
   sendEvent('work_click', { work_title: workTitle })
 }
+
+export function trackWorkFeedback(workTitle: string, feedback: 'good' | 'bad') {
+  sendEvent('work_feedback', { work_title: workTitle, feedback })
+}

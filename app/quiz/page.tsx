@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { QUESTIONS } from '@/data/questions'
+import { QUESTIONS, STAGES, type Question } from '@/data/questions'
 import { calcType, type Scores } from '@/lib/calcResult'
 import { trackQuizComplete } from '@/lib/gtag'
 
-const TOTAL = QUESTIONS.length
+const QUESTIONS_PER_STAGE = 2
 const ANSWER_DELAY_MS = 420
 
 const EMPTY_SCORES: Scores = { intensity: 0, relation: 0, world: 0 }
@@ -19,13 +19,47 @@ function addScores(base: Scores, delta: Partial<Scores>): Scores {
   }
 }
 
+function pickRandom<T>(items: T[], count: number): T[] {
+  const shuffled = [...items].sort(() => Math.random() - 0.5)
+  return shuffled.slice(0, count)
+}
+
+// 세션 시작 시 단계별(고르는 순간 → … → 다 읽고)로 2개씩 랜덤 선택해 12문항 구성
+function buildSessionQuestions(): Question[] {
+  return STAGES.flatMap(({ key }) =>
+    pickRandom(
+      QUESTIONS.filter((q) => q.stage === key),
+      QUESTIONS_PER_STAGE,
+    ),
+  )
+}
+
 export default function QuizPage() {
   const router = useRouter()
+  // 세션마다 다른 랜덤 구성이라 SSR과 클라이언트 결과가 어긋나 hydration mismatch가
+  // 나므로, 마운트 후(클라이언트에서만) 문항을 선택한다.
+  const [questions, setQuestions] = useState<Question[] | null>(null)
   const [step, setStep] = useState(0)
   const [scores, setScores] = useState<Scores>(EMPTY_SCORES)
   const [isAnswering, setIsAnswering] = useState(false)
 
-  const question = QUESTIONS[step]
+  useEffect(() => {
+    // 랜덤 선택 결과가 SSR과 클라이언트에서 달라 hydration mismatch가 발생하므로
+    // 마운트 후에만(클라이언트 한정) 문항을 채운다 — React 공식 권장 패턴
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setQuestions(buildSessionQuestions())
+  }, [])
+
+  if (!questions) {
+    return (
+      <div className="flex flex-1 items-center justify-center text-sm text-zinc-400">
+        질문을 준비하는 중…
+      </div>
+    )
+  }
+
+  const TOTAL = questions.length
+  const question = questions[step]
   const percent = Math.round(((step + 1) / TOTAL) * 100)
 
   function finish(finalScores: Scores) {
@@ -118,7 +152,7 @@ export default function QuizPage() {
 
       <footer className="flex flex-col items-center gap-4 pb-10">
         <div className="flex items-center gap-1.5">
-          {QUESTIONS.map((q, index) => (
+          {questions.map((q, index) => (
             <span
               key={q.id}
               aria-hidden

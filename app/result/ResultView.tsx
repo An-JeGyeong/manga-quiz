@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -8,7 +8,58 @@ import ShareCard from '@/components/ShareCard'
 import MascotCharacter from '@/components/MascotCharacter'
 import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
-import { trackWorkClick } from '@/lib/gtag'
+import { trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
+
+type Feedback = 'good' | 'bad' | null
+
+const FEEDBACK_LABEL: Record<'good' | 'bad', string> = {
+  good: '👍 재밌었어요',
+  bad: '👎 취향 아니었어요',
+}
+
+function WorkFeedbackButtons({ workTitle }: { workTitle: string }) {
+  const [feedback, setFeedback] = useState<Feedback>(null)
+
+  function handleSelect(value: 'good' | 'bad') {
+    return (event: React.MouseEvent) => {
+      event.stopPropagation()
+      setFeedback((prev) => {
+        const next = prev === value ? null : value
+        if (next) trackWorkFeedback(workTitle, next)
+        return next
+      })
+    }
+  }
+
+  return (
+    <div className="mt-1 flex gap-1.5">
+      <button
+        type="button"
+        onClick={handleSelect('good')}
+        aria-pressed={feedback === 'good'}
+        className={
+          feedback === 'good'
+            ? 'rounded-full bg-[#FAECE7] px-3 py-1 text-xs font-semibold text-[#D85A30]'
+            : 'rounded-full border border-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-500 transition-colors hover:bg-[#FAECE7] hover:text-[#D85A30]'
+        }
+      >
+        {FEEDBACK_LABEL.good}
+      </button>
+      <button
+        type="button"
+        onClick={handleSelect('bad')}
+        aria-pressed={feedback === 'bad'}
+        className={
+          feedback === 'bad'
+            ? 'rounded-full bg-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-600'
+            : 'rounded-full border border-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-500 transition-colors hover:bg-zinc-100'
+        }
+      >
+        {FEEDBACK_LABEL.bad}
+      </button>
+    </div>
+  )
+}
 
 const STAT_COLORS: Record<string, string> = {
   강도: '#D85A30',
@@ -68,6 +119,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
             ))}
           </div>
         )}
+        <WorkFeedbackButtons workTitle={work.title} />
       </div>
     </div>
   )
