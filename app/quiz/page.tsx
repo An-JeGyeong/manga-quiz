@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { QUESTIONS } from '@/data/questions'
 import { calcType, type Scores } from '@/lib/calcResult'
+import { trackQuizComplete } from '@/lib/gtag'
 
 const TOTAL = QUESTIONS.length
 const ANSWER_DELAY_MS = 420
@@ -29,6 +30,7 @@ export default function QuizPage() {
 
   function finish(finalScores: Scores) {
     const type = calcType(finalScores)
+    trackQuizComplete(type.key)
     const params = new URLSearchParams({
       type: type.key,
       i: String(finalScores.intensity),

@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import MascotCharacter from '@/components/MascotCharacter'
+import { trackQuizStart } from '@/lib/gtag'
 
 export default function Home() {
   return (
@@ -26,12 +29,13 @@ export default function Home() {
 
         <Link
           href="/quiz"
+          onClick={() => trackQuizStart()}
           className="w-full max-w-xs rounded-2xl bg-[#D85A30] px-6 py-4 text-center text-base font-semibold text-white transition-opacity hover:opacity-90"
         >
           테스트 시작하기
         </Link>
 
-        <div id="ad-main" className="flex h-16 w-full items-center justify-center rounded-lg bg-[#F5F5F5]" />
+        <div id="ad-main" className="h-0 w-full overflow-hidden rounded-lg bg-[#F5F5F5]" />
       </main>
     </div>
   )

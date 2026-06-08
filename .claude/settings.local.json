@@ -12,7 +12,13 @@
       "WebFetch(domain:myanimelist.net)",
       "WebFetch(domain:api.jikan.moe)",
       "Bash(curl *)",
-      "Bash(grep -o '.\\\\{0,5\\\\}일치율.\\\\{0,40\\\\}')"
+      "Bash(grep -o '.\\\\{0,5\\\\}일치율.\\\\{0,40\\\\}')",
+      "Bash(git config *)",
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git add *)"
     ]
   }
 }

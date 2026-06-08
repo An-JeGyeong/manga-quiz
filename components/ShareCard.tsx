@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import html2canvas from 'html2canvas'
 import type { ResultType } from '@/data/types'
+import { trackResultShare } from '@/lib/gtag'
 
 declare global {
   interface Window {
@@ -106,7 +107,10 @@ export default function ShareCard({ resultType }: ShareCardProps) {
       <div className="flex flex-col gap-2">
         <button
           type="button"
-          onClick={handleSaveImage}
+          onClick={() => {
+            trackResultShare('save_image')
+            handleSaveImage()
+          }}
           disabled={isSaving}
           className="rounded-2xl border border-[#633806]/20 px-5 py-3 text-center text-sm font-semibold text-[#633806] transition-colors hover:bg-[#FAEEDA] disabled:opacity-60"
         >
@@ -114,7 +118,10 @@ export default function ShareCard({ resultType }: ShareCardProps) {
         </button>
         <button
           type="button"
-          onClick={handleTossShare}
+          onClick={() => {
+            trackResultShare('toss')
+            handleTossShare()
+          }}
           className="rounded-2xl bg-[#0064FF] px-5 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
         >
           토스로 공유하기
@@ -122,21 +129,30 @@ export default function ShareCard({ resultType }: ShareCardProps) {
         {/* 카카오·인스타그램 공유 SDK 미연동 — 링크 복사로 폴백 */}
         <button
           type="button"
-          onClick={copyShareUrl}
+          onClick={() => {
+            trackResultShare('kakao')
+            copyShareUrl()
+          }}
           className="rounded-2xl bg-[#FEE500] px-5 py-3 text-center text-sm font-semibold text-[#3C1E1E] transition-opacity hover:opacity-90"
         >
           카카오톡으로 공유하기
         </button>
         <button
           type="button"
-          onClick={copyShareUrl}
+          onClick={() => {
+            trackResultShare('instagram')
+            copyShareUrl()
+          }}
           className="rounded-2xl bg-[#E1306C] px-5 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
         >
           인스타그램 스토리에 공유하기
         </button>
         <button
           type="button"
-          onClick={copyShareUrl}
+          onClick={() => {
+            trackResultShare('copy_link')
+            copyShareUrl()
+          }}
           className="rounded-2xl border border-zinc-200 px-5 py-3 text-center text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-50"
         >
           {copyStatus === 'copied' ? '링크가 복사되었어요' : copyStatus === 'failed' ? '복사 실패' : '링크 복사하기'}

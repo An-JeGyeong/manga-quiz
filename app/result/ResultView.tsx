@@ -8,6 +8,7 @@ import ShareCard from '@/components/ShareCard'
 import MascotCharacter from '@/components/MascotCharacter'
 import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
+import { trackWorkClick } from '@/lib/gtag'
 
 const STAT_COLORS: Record<string, string> = {
   강도: '#D85A30',
@@ -40,7 +41,10 @@ function StatBarRow({ bar }: { bar: StatBar }) {
 
 function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
-    <div className="flex flex-col gap-1 rounded-2xl border border-zinc-200 px-4 py-3">
+    <div
+      onClick={() => trackWorkClick(work.title)}
+      className="flex flex-col gap-1 rounded-2xl border border-zinc-200 px-4 py-3"
+    >
       <div className="flex items-center justify-between gap-2">
         <p className="font-semibold text-zinc-900">{work.title}</p>
         <span className="shrink-0 rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-semibold text-[#D85A30]">
@@ -118,7 +122,10 @@ function ResultContent() {
       </section>
 
       {topWork.coverUrl && (
-        <section className="flex gap-4 rounded-3xl border border-zinc-200 px-4 py-4">
+        <section
+          onClick={() => trackWorkClick(topWork.title)}
+          className="flex gap-4 rounded-3xl border border-zinc-200 px-4 py-4"
+        >
           <div className="relative aspect-[2/3] w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
             <Image
               src={topWork.coverUrl}
@@ -163,7 +170,7 @@ function ResultContent() {
         </div>
       </section>
 
-      <div id="ad-result" className="flex h-16 w-full items-center justify-center rounded-lg bg-[#F5F5F5]" />
+      <div id="ad-result" className="h-0 w-full overflow-hidden rounded-lg bg-[#F5F5F5]" />
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold text-zinc-900">친구에게 공유하기</h2>
