@@ -32,6 +32,7 @@ export default function ShareCard({ resultType }: ShareCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
   const [isSaving, setIsSaving] = useState(false)
+  const [showSaveGuide, setShowSaveGuide] = useState(false)
 
   const shareUrl = `${SHARE_BASE_URL}?type=${resultType.key}`
 
@@ -69,14 +70,33 @@ export default function ShareCard({ resultType }: ShareCardProps) {
     setIsSaving(true)
     try {
       const canvas = await html2canvas(cardRef.current, {
+        // cdn.myanimelist.net 등 외부 표지 이미지가 CORS로 캡처에서 빠지지 않도록 시도하고,
+        // 그래도 안전하지 않으면(taint) toBlob에서 에러를 던지게 해 폴백 안내로 넘어간다
+        useCORS: true,
+        allowTaint: false,
         // Next.js 개발 툴바("N" 아이콘, <nextjs-portal>)는 fixed 포지션이라
         // 캡처 영역과 겹치면 함께 찍히므로 명시적으로 제외
         ignoreElements: (element) => element.tagName.toLowerCase() === 'nextjs-portal',
       })
+
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob((result) => {
+          if (result) resolve(result)
+          else reject(new Error('toBlob failed'))
+        }, 'image/png')
+      })
+
+      const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.download = 'manga-result.png'
-      link.href = canvas.toDataURL()
+      link.href = url
       link.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      // 캡처가 막히거나(CORS taint) 모바일 브라우저에서 <a download>가 동작하지 않는 경우
+      // 직접 길게 눌러 저장하도록 안내한다
+      setShowSaveGuide(true)
+      setTimeout(() => setShowSaveGuide(false), 2500)
     } finally {
       setIsSaving(false)
     }
@@ -119,7 +139,7 @@ export default function ShareCard({ resultType }: ShareCardProps) {
           disabled={isSaving}
           className="rounded-2xl border border-[#633806]/20 px-5 py-3 text-center text-sm font-semibold text-[#633806] transition-colors hover:bg-[#FAEEDA] disabled:opacity-60"
         >
-          {isSaving ? '이미지 저장 중…' : '이미지로 저장하기'}
+          {isSaving ? '이미지 저장 중…' : showSaveGuide ? '이미지를 길게 눌러 저장해주세요' : '이미지로 저장하기'}
         </button>
         <button
           type="button"
