@@ -87,5 +87,8 @@ export type ResultType = {
 
 ## 점수 계산 규칙
 - 각 질문당 선택지별 scores는 -2 ~ +2 범위
-- 12문항 완료 시 각 축 최대 ±16 내외
+- 12문항 완료 시 각 축 점수 범위 (18문항 풀 기준 이론상 최대/최소)
+  - intensity: -22 ~ +23
+  - relation:  -11 ~ +23
+  - world:     -7  ~ +23
 - calcResult.ts 외부에서 점수 계산 로직 작성 금지
