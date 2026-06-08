@@ -36,6 +36,16 @@ export default function Home() {
         </Link>
 
         <div id="ad-main" className="h-0 w-full overflow-hidden rounded-lg bg-[#F5F5F5]" />
+
+        <footer className="flex items-center gap-2 text-xs text-zinc-400">
+          <Link href="/privacy" className="transition-colors hover:text-zinc-600 hover:underline">
+            개인정보 처리방침
+          </Link>
+          <span aria-hidden>|</span>
+          <Link href="/terms" className="transition-colors hover:text-zinc-600 hover:underline">
+            이용약관
+          </Link>
+        </footer>
       </main>
     </div>
   )
