@@ -92,8 +92,8 @@ export default function TermsPage() {
           <p>서비스 이용과 관련한 문의사항은 아래 이메일로 연락해 주시기 바랍니다.</p>
           <p>
             이메일:{' '}
-            <a href="mailto:anjmo4568@gmail.com" className="font-medium text-[#D85A30] underline-offset-2 hover:underline">
-              anjmo4568@gmail.com
+            <a href="mailto:anjmo456@naver.com" className="font-medium text-[#D85A30] underline-offset-2 hover:underline">
+              anjmo456@naver.com
             </a>
           </p>
         </section>
