@@ -30,6 +30,7 @@ function FadeInImage({ src, alt, sizes }: { src: string; alt: string; sizes: str
       fill
       sizes={sizes}
       onLoad={() => setLoaded(true)}
+      onError={() => setLoaded(true)}
       className={`object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
     />
   )
