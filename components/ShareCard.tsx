@@ -155,6 +155,17 @@ export default function ShareCard({ resultType }: ShareCardProps) {
         >
           인스타그램 스토리에 공유하기
         </button>
+        {/* X(트위터) 공유 SDK 미연동 + 앱인토스 WebView 정책상 외부 글쓰기 화면으로 이동 불가 — 링크 복사로 폴백 */}
+        <button
+          type="button"
+          onClick={() => {
+            trackResultShare('x')
+            copyShareUrl()
+          }}
+          className="rounded-2xl bg-black px-5 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          X에 공유하기
+        </button>
         <button
           type="button"
           onClick={() => {

@@ -1,14 +1,30 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import ShareCard from '@/components/ShareCard'
 import MascotCharacter from '@/components/MascotCharacter'
+import ResultSkeleton from '@/components/ResultSkeleton'
 import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
 import { trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
+
+function FadeInImage({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
+  const [loaded, setLoaded] = useState(false)
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      onLoad={() => setLoaded(true)}
+      className={`object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+    />
+  )
+}
 
 type Feedback = 'good' | 'bad' | null
 
@@ -98,7 +114,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
     >
       {work.coverUrl && (
         <div className="relative aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
-          <Image src={work.coverUrl} alt={`${work.title} 표지`} fill sizes="64px" className="object-cover" />
+          <FadeInImage src={work.coverUrl} alt={`${work.title} 표지`} sizes="64px" />
         </div>
       )}
       <div className="flex flex-1 flex-col gap-1">
@@ -127,6 +143,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
 
 function ResultContent() {
   const searchParams = useSearchParams()
+  const [isLoading, setIsLoading] = useState(true)
 
   const scores: Scores = {
     intensity: parseScore(searchParams.get('i')),
@@ -136,6 +153,12 @@ function ResultContent() {
   const typeKey = searchParams.get('type')
   const completed = searchParams.get('completed') === 'true'
   const resultType = (typeKey && RESULT_TYPES[typeKey]) || calcType(scores)
+
+  useEffect(() => {
+    // resultType 파싱이 끝난 다음 틱에 로딩 상태를 해제해 스켈레톤 → 실제 결과로 자연스럽게 전환한다
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsLoading(false)
+  }, [])
 
   function handleBack() {
     window.history.go(-1)
@@ -155,10 +178,14 @@ function ResultContent() {
     )
   }
 
+  if (isLoading) {
+    return <ResultSkeleton />
+  }
+
   const topWork = resultType.works[0]
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-8 bg-white px-4 pb-12">
+    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-8 bg-white px-4 pb-12 animate-fade-in">
       <header className="flex items-center gap-3 pt-6">
         <button
           type="button"
@@ -186,13 +213,7 @@ function ResultContent() {
           className="flex gap-4 rounded-3xl border border-zinc-200 px-4 py-4"
         >
           <div className="relative aspect-[2/3] w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-            <Image
-              src={topWork.coverUrl}
-              alt={`${topWork.title} 표지`}
-              fill
-              sizes="96px"
-              className="object-cover"
-            />
+            <FadeInImage src={topWork.coverUrl} alt={`${topWork.title} 표지`} sizes="96px" />
           </div>
           <div className="flex flex-col justify-center gap-1">
             <p className="text-xs font-semibold text-[#D85A30]">일치율 1위 추천 작품</p>
