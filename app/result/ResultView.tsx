@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -13,9 +13,18 @@ import { trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
 
 function FadeInImage({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
   const [loaded, setLoaded] = useState(false)
+  const imgRef = useRef<HTMLImageElement | null>(null)
+
+  useEffect(() => {
+    // 캐시에서 즉시 로드된 이미지는 onLoad가 발생하지 않으므로 마운트 시 complete 여부를 직접 확인한다
+    if (imgRef.current?.complete) {
+      setLoaded(true)
+    }
+  }, [])
 
   return (
     <Image
+      ref={imgRef}
       src={src}
       alt={alt}
       fill

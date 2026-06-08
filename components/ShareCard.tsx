@@ -68,6 +68,7 @@ export default function ShareCard({ resultType }: ShareCardProps) {
   async function handleSaveImage() {
     if (!cardRef.current || isSaving) return
     setIsSaving(true)
+    setShowSaveGuide(false)
     try {
       const canvas = await html2canvas(cardRef.current, {
         // cdn.myanimelist.net 등 외부 표지 이미지가 CORS로 캡처에서 빠지지 않도록 시도하고,
