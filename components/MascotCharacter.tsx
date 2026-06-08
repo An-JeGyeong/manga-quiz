@@ -10,13 +10,17 @@ export default function MascotCharacter({ className }: MascotCharacterProps) {
       aria-label="manga 취향 테스트 마스코트"
       className={className}
     >
-      <circle cx="60" cy="60" r="56" fill="#FAEEDA" />
-      <circle cx="60" cy="66" r="40" fill="#FFFFFF" />
-      <circle cx="46" cy="62" r="6" fill="#712B13" />
-      <circle cx="74" cy="62" r="6" fill="#712B13" />
-      <path d="M48 80 Q60 90 72 80" stroke="#D85A30" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <path d="M40 44 Q46 36 54 40" stroke="#D85A30" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <path d="M80 44 Q74 36 66 40" stroke="#D85A30" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path
+        d="M30 92 C24 102 14 110 6 113 C16 116 32 110 44 98 C40 95 34 92 30 92 Z"
+        fill="#FFF3EF"
+        stroke="#F2380F"
+        strokeWidth="6"
+        strokeLinejoin="round"
+      />
+      <ellipse cx="64" cy="54" rx="50" ry="42" fill="#FFF3EF" stroke="#F2380F" strokeWidth="6" />
+      <circle cx="48" cy="54" r="7" fill="#3A160A" />
+      <circle cx="80" cy="54" r="7" fill="#3A160A" />
+      <path d="M60 70 Q70 76 80 70" stroke="#3A160A" strokeWidth="5" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
