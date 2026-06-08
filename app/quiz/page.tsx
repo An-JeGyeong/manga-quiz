@@ -152,7 +152,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col bg-white px-4">
+    <div className="mx-auto flex w-full flex-1 flex-col bg-white px-4 sm:max-w-lg lg:max-w-xl">
       <header className="flex flex-col gap-3 pt-6">
         <div className="flex items-center justify-between">
           <button

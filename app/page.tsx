@@ -6,7 +6,7 @@ import { trackQuizStart } from '@/lib/gtag'
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-white">
+    <div className="mx-auto flex w-full flex-1 flex-col bg-white sm:max-w-lg lg:max-w-xl">
       <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16">
         <section className="flex w-full max-w-md flex-col items-center gap-4 rounded-3xl bg-[#FAECE7] px-8 py-14 text-center">
           <MascotCharacter className="h-20 w-20" />

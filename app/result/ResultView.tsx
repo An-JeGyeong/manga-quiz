@@ -176,7 +176,7 @@ function ResultContent() {
 
   if (!completed && !typeKey) {
     return (
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center gap-4 bg-white px-4 text-center">
+      <div className="mx-auto flex w-full flex-1 flex-col items-center justify-center gap-4 bg-white px-4 text-center sm:max-w-lg lg:max-w-xl">
         <p className="text-base font-medium text-zinc-600">테스트를 완료해주세요</p>
         <Link
           href="/"
@@ -195,7 +195,7 @@ function ResultContent() {
   const topWork = resultType.works[0]
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-8 bg-white px-4 pb-12 animate-fade-in">
+    <div className="mx-auto flex w-full flex-1 flex-col gap-8 bg-white px-4 pb-12 animate-fade-in sm:max-w-lg lg:max-w-xl">
       <header className="flex items-center gap-3 pt-6">
         <button
           type="button"
