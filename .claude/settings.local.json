@@ -18,7 +18,12 @@
       "Bash(git remote *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(ls -la .claude)",
+      "Bash(ls -la .claude/agents)",
+      "Bash(ls docs/)",
+      "Bash(grep -oP '-?\\\\d+$')",
+      "Bash(grep -oE '\\\\-?[0-9]+$')"
     ]
   }
 }

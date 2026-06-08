@@ -33,3 +33,25 @@ export function trackWorkClick(workTitle: string) {
 export function trackWorkFeedback(workTitle: string, feedback: 'good' | 'bad') {
   sendEvent('work_feedback', { work_title: workTitle, feedback })
 }
+
+export function trackQuizAbandon(
+  step: number,
+  questionId: number,
+  timeSpentSeconds: number,
+  questionTimeSpentSeconds: number,
+) {
+  sendEvent('quiz_abandon', {
+    step,
+    question_id: questionId,
+    time_spent_seconds: timeSpentSeconds,
+    question_time_spent: questionTimeSpentSeconds,
+  })
+}
+
+export function trackQuizSkip(step: number, questionId: number, questionTimeSpentSeconds: number) {
+  sendEvent('quiz_skip', {
+    step,
+    question_id: questionId,
+    question_time_spent: questionTimeSpentSeconds,
+  })
+}
