@@ -3,8 +3,11 @@
 import Link from 'next/link'
 import MascotCharacter from '@/components/MascotCharacter'
 import { trackQuizStart } from '@/lib/gtag'
+import { useRootNavigation } from '@/lib/useAppNavigation'
 
 export default function Home() {
+  useRootNavigation()
+
   return (
     <div className="mx-auto flex w-full flex-1 flex-col bg-white sm:max-w-lg lg:max-w-xl">
       <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16">
