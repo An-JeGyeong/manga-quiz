@@ -1,5 +1,5 @@
 const SHARE_BASE_URL = 'https://manga-quiz.vercel.app'
-const OG_IMAGE_URL = `${SHARE_BASE_URL}/og-placeholder.svg`
+const OG_IMAGE_URL = `${SHARE_BASE_URL}/og-image.png`
 
 type KakaoLink = {
   webUrl?: string
