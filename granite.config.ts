@@ -8,6 +8,7 @@ export default defineConfig({
     icon: './public/mascot.png',
   },
   permissions: [],
+  outdir: 'dist',
   web: {
     host: 'localhost',
     port: 3000,

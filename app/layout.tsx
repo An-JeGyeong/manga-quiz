@@ -19,6 +19,7 @@ const SITE_DESCRIPTION =
   "12문항으로 알아보는 나의 manga 취향 — 8가지 유형 중 나와 꼭 맞는 취향을 찾아보세요";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://manga-quiz.vercel.app'),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   openGraph: {
