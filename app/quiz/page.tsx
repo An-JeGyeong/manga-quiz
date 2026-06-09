@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { QUESTIONS, STAGES, type Question } from '@/data/questions'
 import { calcType, type Scores } from '@/lib/calcResult'
 import { trackQuizAbandon, trackQuizComplete, trackQuizSkip } from '@/lib/gtag'
+import { usePageNavigation } from '@/lib/useAppNavigation'
 
 const QUESTIONS_PER_STAGE = 2
 const ANSWER_DELAY_MS = 420
@@ -55,6 +56,22 @@ export default function QuizPage() {
   // visibilitychange 핸들러가 중복 전송하지 않도록 막는 플래그
   const hasTrackedAbandonRef = useRef(false)
 
+  // 토스 내비게이션 바 뒤로가기 버튼 → 커스텀 handleBack과 동일 동작
+  usePageNavigation(() => {
+    if (isAnswering) return
+    hasTrackedAbandonRef.current = true
+    const current = questions?.[step]
+    if (current !== undefined) {
+      trackQuizAbandon(
+        step + 1,
+        current.id,
+        elapsedSeconds(quizStartedAtRef.current),
+        elapsedSeconds(questionEnteredAtRef.current),
+      )
+    }
+    window.history.go(-1)
+  })
+
   useEffect(() => {
     // 랜덤 선택 결과가 SSR과 클라이언트에서 달라 hydration mismatch가 발생하므로
     // 마운트 후에만(클라이언트 한정) 문항을 채운다 — React 공식 권장 패턴
@@ -69,10 +86,11 @@ export default function QuizPage() {
 
   // 화면에 새 질문이 표시될 때마다 진입 시각을 갱신해 질문별 체류 시간을 잴 수 있게 한다
   // 새 질문으로 넘어왔다는 것은 이전 질문에서는 이탈하지 않았다는 뜻이므로 플래그도 리셋한다
+  // questions 의존성 제거 — null→array 전환 시 플래그가 의도치 않게 리셋되는 문제 방지
   useEffect(() => {
     questionEnteredAtRef.current = Date.now()
     hasTrackedAbandonRef.current = false
-  }, [questions, step])
+  }, [step])
 
   // 브라우저 뒤로가기 등으로 페이지가 가려지면 이탈로 간주해 quiz_abandon을 전송한다
   useEffect(() => {
@@ -141,13 +159,15 @@ export default function QuizPage() {
   }
 
   function handleBack() {
-    hasTrackedAbandonRef.current = true
-    trackQuizAbandon(
-      step + 1,
-      question.id,
-      elapsedSeconds(quizStartedAtRef.current),
-      elapsedSeconds(questionEnteredAtRef.current),
-    )
+    if (!hasTrackedAbandonRef.current) {
+      hasTrackedAbandonRef.current = true
+      trackQuizAbandon(
+        step + 1,
+        question.id,
+        elapsedSeconds(quizStartedAtRef.current),
+        elapsedSeconds(questionEnteredAtRef.current),
+      )
+    }
     window.history.go(-1)
   }
 
