@@ -56,21 +56,8 @@ export default function QuizPage() {
   // visibilitychange 핸들러가 중복 전송하지 않도록 막는 플래그
   const hasTrackedAbandonRef = useRef(false)
 
-  // 토스 내비게이션 바 뒤로가기 버튼 → 커스텀 handleBack과 동일 동작
-  usePageNavigation(() => {
-    if (isAnswering) return
-    hasTrackedAbandonRef.current = true
-    const current = questions?.[step]
-    if (current !== undefined) {
-      trackQuizAbandon(
-        step + 1,
-        current.id,
-        elapsedSeconds(quizStartedAtRef.current),
-        elapsedSeconds(questionEnteredAtRef.current),
-      )
-    }
-    window.history.go(-1)
-  })
+  // 토스 내비게이션 바 뒤로가기 버튼 → 헤더 ← 버튼과 동일한 handleBack 호출
+  usePageNavigation(handleBack)
 
   useEffect(() => {
     // 랜덤 선택 결과가 SSR과 클라이언트에서 달라 hydration mismatch가 발생하므로
@@ -159,11 +146,13 @@ export default function QuizPage() {
   }
 
   function handleBack() {
-    if (!hasTrackedAbandonRef.current) {
+    if (isAnswering) return
+    const current = questions?.[step]
+    if (!hasTrackedAbandonRef.current && current !== undefined) {
       hasTrackedAbandonRef.current = true
       trackQuizAbandon(
         step + 1,
-        question.id,
+        current.id,
         elapsedSeconds(quizStartedAtRef.current),
         elapsedSeconds(questionEnteredAtRef.current),
       )
