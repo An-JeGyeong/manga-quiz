@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 앱인토스 빌드 산출물
+    "dist/**",
   ]),
 ]);
 
