@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
+const isTossBuild = process.env.BUILD_TARGET === 'toss';
+
 const nextConfig: NextConfig = {
-  output: 'export',
-  distDir: 'dist/web',
+  ...(isTossBuild ? { output: 'export' as const, distDir: 'dist/web' } : {}),
   images: {
     unoptimized: true,
     remotePatterns: [
