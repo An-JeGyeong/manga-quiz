@@ -1,8 +1,22 @@
+'use client'
+
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { graniteEvent, closeView } from '@apps-in-toss/web-framework'
 
+declare global {
+  interface Window {
+    ReactNativeWebView?: unknown
+  }
+}
+
+function isAppInTossWebView() {
+  return typeof window !== 'undefined' && Boolean(window.ReactNativeWebView)
+}
+
 export function useRootNavigation() {
   useEffect(() => {
+    if (!isAppInTossWebView()) return
+
     return graniteEvent.addEventListener('backEvent', {
       onEvent: () => { void closeView() },
     })
@@ -18,6 +32,8 @@ export function usePageNavigation(onBack: () => void) {
   }, [onBack])
 
   useEffect(() => {
+    if (!isAppInTossWebView()) return
+
     return graniteEvent.addEventListener('backEvent', {
       onEvent: () => { onBackRef.current() },
     })
