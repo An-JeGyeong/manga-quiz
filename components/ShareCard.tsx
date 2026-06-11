@@ -21,7 +21,7 @@ const STAT_COLORS: Record<string, string> = {
   성장: '#BA7517',
 }
 
-const SHARE_TITLE = '내 manga 취향은?'
+const SHARE_TITLE = '내 일본 만화 취향은?'
 const SHARE_BASE_URL = 'https://manga-quiz.vercel.app/result'
 
 type ShareCardProps = {
@@ -107,7 +107,7 @@ export default function ShareCard({ resultType }: ShareCardProps) {
     <div className="flex flex-col gap-4">
       <div ref={cardRef} className="flex flex-col gap-4 rounded-3xl bg-[#FAEEDA] px-6 py-6">
         <div>
-          <p className="text-sm font-medium text-[#633806]">내 manga 취향 카드</p>
+          <p className="text-sm font-medium text-[#633806]">내 일본 만화 취향 카드</p>
           <h3 className="text-xl font-bold text-[#633806]">{resultType.name}</h3>
           <p className="mt-1 text-sm text-[#633806]">{resultType.quote}</p>
         </div>

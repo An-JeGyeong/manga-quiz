@@ -212,7 +212,7 @@ function ResultContent() {
 
       <section className="flex flex-col items-center gap-2 rounded-3xl bg-[#FAECE7] px-6 py-12 text-center">
         <MascotCharacter className="h-20 w-20" />
-        <p className="text-sm font-medium text-[#D85A30]">당신의 manga 취향은</p>
+        <p className="text-sm font-medium text-[#D85A30]">당신의 일본 만화 취향은</p>
         <h1 className="text-3xl font-bold text-[#712B13]">{resultType.name}</h1>
         <p className="mt-1 text-base text-[#712B13]">{resultType.quote}</p>
       </section>
