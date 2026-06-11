@@ -17,14 +17,14 @@ export default function Home() {
             12문항 · 약 2분
           </span>
           <h1 className="text-3xl font-bold leading-snug text-[#712B13]">
-            내 manga 취향,
+            내 일본 만화 취향,
             <br />
             정확히 알고 있나요?
           </h1>
           <p className="text-base leading-relaxed text-[#712B13]">
             질문에 답하면 8가지 유형 중
             <br />
-            나와 꼭 맞는 manga 취향을 알려드려요
+            나와 꼭 맞는 일본 만화 취향을 알려드려요
           </p>
         </section>
 

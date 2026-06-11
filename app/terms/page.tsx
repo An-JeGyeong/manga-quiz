@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: '이용약관 | manga 취향 테스트',
-  description: 'manga 취향 테스트 서비스의 이용약관입니다.',
+  title: '이용약관 | 일본 만화 취향 테스트',
+  description: '일본 만화 취향 테스트 서비스의 이용약관입니다.',
 }
 
 export default function TermsPage() {
@@ -19,7 +19,7 @@ export default function TermsPage() {
         <section className="flex flex-col gap-2">
           <h2 className="text-base font-semibold text-zinc-900">제1조 (목적)</h2>
           <p>
-            이 약관은 안제경(이하 &ldquo;운영자&rdquo;)이 제공하는 manga 취향 테스트 서비스(이하 &ldquo;서비스&rdquo;)의
+            이 약관은 안제경(이하 &ldquo;운영자&rdquo;)이 제공하는 일본 만화 취향 테스트 서비스(이하 &ldquo;서비스&rdquo;)의
             이용과 관련하여 운영자와 이용자 간의 권리·의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
           </p>
         </section>
@@ -27,7 +27,7 @@ export default function TermsPage() {
         <section className="flex flex-col gap-2">
           <h2 className="text-base font-semibold text-zinc-900">제2조 (서비스의 내용)</h2>
           <p>
-            운영자는 이용자가 제시된 질문에 응답하면 그 결과를 바탕으로 manga 취향 유형을 안내하는 콘텐츠 서비스를
+            운영자는 이용자가 제시된 질문에 응답하면 그 결과를 바탕으로 일본 만화 취향 유형을 안내하는 콘텐츠 서비스를
             제공합니다. 본 서비스는 별도의 회원가입 절차 없이 누구나 이용할 수 있습니다.
           </p>
         </section>

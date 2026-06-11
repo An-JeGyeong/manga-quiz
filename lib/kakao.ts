@@ -61,7 +61,7 @@ export function shareToKakao(resultTypeName: string, quote: string, typeKey: str
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${resultTypeName} | manga 취향 테스트`,
+        title: `${resultTypeName} | 일본 만화 취향 테스트`,
         description: quote,
         imageUrl: OG_IMAGE_URL,
         link,

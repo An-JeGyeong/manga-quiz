@@ -1,6 +1,6 @@
 # manga-quiz
 
-manga 취향 테스트 미니앱. 앱인토스(토스 WebView) 배포 목표.
+일본 만화 취향 테스트 미니앱. 앱인토스(토스 WebView) 배포 목표.
 
 ## 스택
 - Next.js 14 App Router + TypeScript + Tailwind CSS

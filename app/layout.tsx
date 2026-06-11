@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_TITLE = "내 manga 취향 테스트";
+const SITE_TITLE = "내 일본 만화 취향 테스트";
 const SITE_DESCRIPTION =
-  "12문항으로 알아보는 나의 manga 취향 — 8가지 유형 중 나와 꼭 맞는 취향을 찾아보세요";
+  "12문항으로 알아보는 나의 일본 만화 취향 — 8가지 유형 중 나와 꼭 맞는 취향을 찾아보세요";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://manga-quiz.vercel.app'),

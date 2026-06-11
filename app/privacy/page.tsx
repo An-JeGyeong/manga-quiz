@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: '개인정보 처리방침 | manga 취향 테스트',
-  description: 'manga 취향 테스트 서비스의 개인정보 처리방침입니다.',
+  title: '개인정보 처리방침 | 일본 만화 취향 테스트',
+  description: '일본 만화 취향 테스트 서비스의 개인정보 처리방침입니다.',
 }
 
 export default function PrivacyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
 
       <div className="flex flex-col gap-6 text-sm leading-relaxed text-zinc-700">
         <p>
-          manga 취향 테스트(이하 &ldquo;서비스&rdquo;)를 운영하는 안제경(이하 &ldquo;운영자&rdquo;)은 이용자의 개인정보를
+          일본 만화 취향 테스트(이하 &ldquo;서비스&rdquo;)를 운영하는 안제경(이하 &ldquo;운영자&rdquo;)은 이용자의 개인정보를
           소중히 여기며, 「개인정보 보호법」 등 관련 법령을 준수하기 위해 노력하고 있습니다. 본 방침은 서비스 이용과
           관련하여 개인정보가 어떻게 처리되는지 안내합니다.
         </p>
