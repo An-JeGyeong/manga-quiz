@@ -5,7 +5,7 @@ const isTossBuild = process.env.BUILD_TARGET === 'toss';
 const nextConfig: NextConfig = {
   ...(isTossBuild ? { output: 'export' as const, distDir: 'dist/web' } : {}),
   images: {
-    unoptimized: true,
+    ...(isTossBuild ? { unoptimized: true } : {}),
     remotePatterns: [
       {
         protocol: "https",
