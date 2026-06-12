@@ -11,7 +11,17 @@ import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
 import { trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
 
-function FadeInImage({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
+function FadeInImage({
+  src,
+  alt,
+  sizes,
+  objectFit = 'cover',
+}: {
+  src: string
+  alt: string
+  sizes: string
+  objectFit?: 'cover' | 'contain'
+}) {
   const [loaded, setLoaded] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
 
@@ -31,7 +41,7 @@ function FadeInImage({ src, alt, sizes }: { src: string; alt: string; sizes: str
       sizes={sizes}
       onLoad={() => setLoaded(true)}
       onError={() => setLoaded(true)}
-      className={`object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      className={`${objectFit === 'contain' ? 'object-contain' : 'object-cover'} transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
     />
   )
 }
@@ -58,15 +68,15 @@ function WorkFeedbackButtons({ workTitle }: { workTitle: string }) {
   }
 
   return (
-    <div className="mt-1 flex gap-1.5">
+    <div className="mt-auto flex gap-1.5 pt-1">
       <button
         type="button"
         onClick={handleSelect('good')}
         aria-pressed={feedback === 'good'}
         className={
           feedback === 'good'
-            ? 'rounded-full bg-[#FAECE7] px-3 py-1 text-xs font-semibold text-[#D85A30]'
-            : 'rounded-full border border-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-500 transition-colors hover:bg-[#FAECE7] hover:text-[#D85A30]'
+            ? 'rounded-full border border-[#D85A30]/30 bg-[#D85A30]/25 px-3 py-1 text-xs font-semibold text-[#D85A30]'
+            : 'rounded-full border border-[#D85A30]/20 bg-[#FAECE7] px-3 py-1 text-xs font-semibold text-[#D85A30] transition-colors'
         }
       >
         {FEEDBACK_LABEL.good}
@@ -77,8 +87,8 @@ function WorkFeedbackButtons({ workTitle }: { workTitle: string }) {
         aria-pressed={feedback === 'bad'}
         className={
           feedback === 'bad'
-            ? 'rounded-full bg-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-600'
-            : 'rounded-full border border-zinc-200 px-3 py-1 text-xs font-semibold text-zinc-500 transition-colors hover:bg-zinc-100'
+            ? 'rounded-full border border-zinc-300 bg-zinc-300 px-3 py-1 text-xs font-semibold text-zinc-700'
+            : 'rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-500 transition-colors'
         }
       >
         {FEEDBACK_LABEL.bad}
@@ -123,8 +133,8 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
       className="flex gap-3 rounded-2xl border border-zinc-200 px-4 py-3"
     >
       {work.coverUrl && (
-        <div className="relative aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
-          <FadeInImage src={work.coverUrl} alt={`${work.title} 표지`} sizes="64px" />
+        <div className="relative aspect-[2/3] w-20 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+          <FadeInImage src={work.coverUrl} alt={`${work.title} 표지`} sizes="80px" objectFit="contain" />
         </div>
       )}
       <div className="flex flex-1 flex-col gap-1">
@@ -194,6 +204,8 @@ function ResultContent() {
 
   const topWork = resultType.works[0]
 
+  if (!topWork) return null
+
   return (
     <div className="mx-auto flex w-full flex-1 flex-col gap-8 bg-white px-4 pb-12 animate-fade-in sm:max-w-lg lg:max-w-xl">
       <header className="flex items-center gap-3 pt-6">
@@ -217,30 +229,30 @@ function ResultContent() {
         <p className="mt-1 text-base text-[#712B13]">{resultType.quote}</p>
       </section>
 
-      {topWork.coverUrl && (
-        <section
-          onClick={() => trackWorkClick(topWork.title)}
-          className="flex gap-4 rounded-3xl border border-zinc-200 px-4 py-4"
-        >
+      <section
+        onClick={() => trackWorkClick(topWork.title)}
+        className="flex gap-4 rounded-3xl border border-zinc-200 px-4 py-4"
+      >
+        {topWork.coverUrl && (
           <div className="relative aspect-[2/3] w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
             <FadeInImage src={topWork.coverUrl} alt={`${topWork.title} 표지`} sizes="96px" />
           </div>
-          <div className="flex flex-col justify-center gap-1">
-            <p className="text-xs font-semibold text-[#D85A30]">일치율 1위 추천 작품</p>
-            <p className="text-lg font-bold text-zinc-900">{topWork.title}</p>
-            <p className="text-sm text-zinc-600">{topWork.reason}</p>
-            {topWork.tags && topWork.tags.length > 0 && (
-              <div className="mt-1 flex flex-wrap gap-1.5">
-                {topWork.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-medium text-[#D85A30]">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+        )}
+        <div className="flex flex-col justify-center gap-1">
+          <p className="text-xs font-semibold text-[#D85A30]">일치율 1위 추천 작품</p>
+          <p className="text-lg font-bold text-zinc-900">{topWork.title}</p>
+          <p className="text-sm text-zinc-600">{topWork.reason}</p>
+          {topWork.tags && topWork.tags.length > 0 && (
+            <div className="mt-1 flex flex-wrap gap-1.5">
+              {topWork.tags.map((tag) => (
+                <span key={tag} className="rounded-full bg-[#FAECE7] px-2 py-0.5 text-xs font-medium text-[#D85A30]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold text-zinc-900">취향 스탯</h2>
