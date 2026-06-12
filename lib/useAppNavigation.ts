@@ -2,16 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { graniteEvent, closeView } from '@apps-in-toss/web-framework'
-
-declare global {
-  interface Window {
-    ReactNativeWebView?: unknown
-  }
-}
-
-function isAppInTossWebView() {
-  return typeof window !== 'undefined' && Boolean(window.ReactNativeWebView)
-}
+import { isAppInTossWebView } from '@/lib/webview'
 
 export function useRootNavigation() {
   useEffect(() => {

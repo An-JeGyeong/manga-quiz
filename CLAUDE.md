@@ -7,9 +7,6 @@
 - 상태: useState만 (DB 없음, 외부 API 없음)
 - 배포: Vercel → 앱인토스 WebView로 임베드
 
-## 환경 변수
-- `NEXT_PUBLIC_KAKAO_JS_KEY` — 카카오 공유 SDK(Kakao Share) JS 키 (lib/kakao.ts)
-
 ## 질문 데이터 구조
 - data/questions.ts에 18문항(스토리 흐름 6단계 × 3개)을 정의
 - 세션 시작마다 app/quiz/page.tsx에서 단계별로 2개씩 랜덤 선택 → 매번 12문항 진행

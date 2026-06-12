@@ -11,45 +11,40 @@
 ```ts
 // 금지
 router.back()         // → window.history.go(-1) 사용
-window.open()         // → bridge.openExternalBrowser(url) 사용
+window.open()         // → @apps-in-toss/web-framework의 openURL(url) 사용
 localStorage          // → pre-commit이 차단
 sessionStorage        // → pre-commit이 차단
 
 // 허용
 window.history.go(-1)
-window.toss?.share({ title, text, url })  // 토스 네이티브 공유
+share({ message })    // @apps-in-toss/web-framework, 토스 네이티브 공유 시트
 ```
 
 ### 토스 브릿지 공유 연동
+- `@apps-in-toss/web-framework`의 `share({ message })`만 사용 (텍스트 공유 시트, `title`/`url` 별도 필드 없음 — 메시지에 포함)
+- 토스 WebView 여부는 `lib/webview.ts`의 `isAppInTossWebView()`(`window.ReactNativeWebView` 존재 여부)로 판단
+- WebView 밖이거나 `share` 실패 시: `navigator.clipboard`로 링크 복사 폴백
 ```ts
 // components/ShareCard.tsx
-function handleTossShare() {
-  if (window.toss?.share) {
-    window.toss.share({
-      title: '내 manga 취향은?',
-      text: resultType.quote,
-      url: `https://manga-quiz.vercel.app/result?type=${typeKey}`,
-    })
-  } else {
-    // 앱 밖에서 접근 시 fallback: 클립보드 복사
-    navigator.clipboard.writeText(shareUrl)
+import { share } from '@apps-in-toss/web-framework'
+import { isAppInTossWebView } from '@/lib/webview'
+
+async function handleTossShare() {
+  if (!isAppInTossWebView()) {
+    copyShareUrl() // navigator.clipboard.writeText(shareUrl)
+    return
+  }
+  try {
+    await share({ message: `${title}\n${quote}\n${shareUrl}` })
+  } catch {
+    copyShareUrl()
   }
 }
 ```
 
-### 이미지 저장 (공유 카드)
-```ts
-// html2canvas로 ShareCard 컴포넌트 캡처 후 PNG 다운로드
-import html2canvas from 'html2canvas'
-
-async function saveCardImage(ref: RefObject<HTMLDivElement>) {
-  const canvas = await html2canvas(ref.current!)
-  const link = document.createElement('a')
-  link.download = 'manga-result.png'
-  link.href = canvas.toDataURL()
-  link.click()
-}
-```
+### 이미지 저장 / 카카오 공유
+- 미지원: DOM 캡처(html2canvas) 및 카카오 전용 공유 API는 앱인토스 SDK에 없어 제거됨
+- 카카오톡 공유는 "토스로 공유하기"의 네이티브 공유 시트(OS 공유 대상에 카카오톡 포함)로 대체
 
 ## 화면 구성 및 UX 규칙
 
@@ -65,7 +60,7 @@ async function saveCardImage(ref: RefObject<HTMLDivElement>) {
 - 취향 스탯: 강도 / 관계 / 세계관 / 성장 4개 바 차트
 - 공유 카드: 앰버(#FAEEDA) 배경, 스탯 2×2 그리드 + 추천 작품 3개
 - 추천 작품: 일치율(%) 표시, 클릭 시 망가 플랫폼 연결 (4단계 연계)
-- 공유 버튼 순서: 토스 → 카카오 → 인스타 스토리 → 링크 복사
+- 공유 버튼 순서: 토스로 공유하기 → 링크 복사하기
 
 ## 컬러 토큰
 ```

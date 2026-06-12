@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           <h2 className="text-base font-semibold text-zinc-900">2. 개인정보의 수집 및 이용 목적</h2>
           <p>
             운영자는 개인정보를 수집하지 않으므로 별도의 수집·이용 목적이 없습니다. 다만 서비스 이용 현황을 파악하고
-            품질을 개선하기 위해 아래와 같은 분석 도구 및 외부 SDK를 사용합니다.
+            품질을 개선하기 위해 아래와 같은 분석 도구를 사용합니다.
           </p>
         </section>
 
@@ -49,21 +49,12 @@ export default function PrivacyPage() {
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">4. 카카오 공유 SDK 이용에 관한 사항</h2>
-          <p>
-            본 서비스는 결과 공유 기능을 제공하기 위해 카카오(Kakao)에서 제공하는 공유 SDK(Kakao Share)를
-            사용합니다. 이용자가 공유 버튼을 직접 클릭하는 경우에 한하여 SDK가 동작하며, 이 과정에서 처리되는
-            정보는 카카오의 개인정보 처리방침을 따릅니다.
-          </p>
-        </section>
-
-        <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">5. 개인정보의 제3자 제공</h2>
+          <h2 className="text-base font-semibold text-zinc-900">4. 개인정보의 제3자 제공</h2>
           <p>운영자는 이용자의 개인정보를 별도로 수집·보유하지 않으므로, 개인정보를 제3자에게 제공하지 않습니다.</p>
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">6. 쿠키(Cookie)의 운영</h2>
+          <h2 className="text-base font-semibold text-zinc-900">5. 쿠키(Cookie)의 운영</h2>
           <p>
             서비스는 이용 통계 분석을 위해 Google Analytics 등 외부 도구에서 쿠키를 사용할 수 있습니다. 이용자는
             웹 브라우저의 옵션 설정을 통해 쿠키 저장을 거부할 수 있으나, 이 경우 일부 기능 이용에 제한이 있을 수
@@ -72,7 +63,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">7. 이용자의 권리와 행사 방법</h2>
+          <h2 className="text-base font-semibold text-zinc-900">6. 이용자의 권리와 행사 방법</h2>
           <p>
             운영자는 이용자의 개인정보를 별도로 보유·관리하지 않으므로 열람, 정정, 삭제 등을 요청할 개인정보가
             존재하지 않습니다. 서비스 이용과 관련하여 궁금한 점이 있으시면 아래 연락처로 문의해 주시기 바랍니다.
@@ -80,7 +71,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">8. 개인정보 보호책임자 및 문의처</h2>
+          <h2 className="text-base font-semibold text-zinc-900">7. 개인정보 보호책임자 및 문의처</h2>
           <p>운영자: 안제경</p>
           <p>
             이메일:{' '}
@@ -95,7 +86,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-zinc-900">9. 고지의 의무</h2>
+          <h2 className="text-base font-semibold text-zinc-900">8. 고지의 의무</h2>
           <p>
             본 방침은 관련 법령, 정책 또는 서비스 내용의 변경에 따라 추가·삭제 및 수정될 수 있으며, 변경 시에는
             서비스 내 공지를 통해 고지합니다.
