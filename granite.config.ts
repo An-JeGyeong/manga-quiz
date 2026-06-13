@@ -5,7 +5,7 @@ export default defineConfig({
   brand: {
     displayName: '일본 만화 취향 테스트',
     primaryColor: '#D85A30',
-    icon: './public/mascot.png',
+    icon: './public/app.png',
   },
   permissions: [],
   outdir: 'dist',
