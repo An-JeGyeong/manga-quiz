@@ -60,7 +60,7 @@ export const QUESTIONS: Question[] = [
     answers: [
       { text: '"얼마나 짜릿한 전투가 펼쳐질까"', scores: { intensity: 2 } },
       { text: '"어떤 동료들을 만나게 될까"', scores: { relation: 2 } },
-      { text: '"주인공은 어떤 갈등을 마주하게 될까"', scores: { relation: -1, intensity: 1 } },
+      { text: '"주인공은 어떤 갈등을 마주하게 될까"', scores: { relation: -1 } },
       { text: '"어떤 잔잔한 위로를 받을 수 있을까"', scores: { intensity: -2 } },
     ],
   },
@@ -87,7 +87,7 @@ export const QUESTIONS: Question[] = [
       { text: '거칠게 부딪히게 되는 라이벌', scores: { intensity: 2, relation: -1 } },
       { text: '앞으로 함께할 든든한 동료가 될 인물', scores: { relation: 2 } },
       { text: '스쳐 지나가듯 잠깐 마주친 인연', scores: { relation: -1 } },
-      { text: '굳이 마주치지 않고 혼자 걸어가는 길', scores: { relation: -2 } },
+      { text: '굳이 마주치지 않고 혼자 걸어가는 길', scores: { relation: -2, intensity: -2 } },
     ],
   },
   {
@@ -99,7 +99,7 @@ export const QUESTIONS: Question[] = [
       { text: '"다음 화에 무슨 일이 벌어질지 심장이 뛴다"', scores: { intensity: 2 } },
       { text: '"이 인물들 관계가 앞으로 어떻게 될지 궁금하다"', scores: { relation: 2 } },
       { text: '"이 세계는 대체 어떤 곳일지 궁금해진다"', scores: { world: 2 } },
-      { text: '"그냥 편안하게 계속 보고 싶은 분위기다"', scores: { intensity: -2 } },
+      { text: '"그냥 편안하게 계속 보고 싶은 분위기다"', scores: { intensity: -2, world: -1 } },
     ],
   },
 
@@ -113,7 +113,7 @@ export const QUESTIONS: Question[] = [
       { text: '한 치 앞도 예측할 수 없이 몰아치는 사건들', scores: { intensity: 2 } },
       { text: '동료들과 부딪히고 화해하며 단단해지는 관계', scores: { relation: 2 } },
       { text: '조금씩 드러나는 세계관의 비밀', scores: { world: 2 } },
-      { text: '큰 사건 없이 잔잔하게 쌓이는 일상의 결', scores: { intensity: -2 } },
+      { text: '큰 사건 없이 잔잔하게 쌓이는 일상의 결', scores: { intensity: -2, world: -1 } },
     ],
   },
   {
@@ -135,9 +135,9 @@ export const QUESTIONS: Question[] = [
     axis: ['intensity', 'world', 'relation'],
     answers: [
       { text: '"사실 이 세계엔 아무도 모르는 비밀이 있다"', scores: { world: 2 } },
-      { text: '"이 능력엔 숨겨진 대가가 있다"', scores: { world: 1, intensity: 1 } },
+      { text: '"이 능력엔 숨겨진 대가가 있다"', scores: { world: 1 } },
       { text: '"이 사람과의 관계엔 말 못 할 사연이 있다"', scores: { relation: 1, world: -1 } },
-      { text: '"평범해 보였던 일상에 작은 균열이 생긴다"', scores: { world: -2 } },
+      { text: '"평범해 보였던 일상에 작은 균열이 생긴다"', scores: { world: -2, intensity: -1 } },
     ],
   },
 
@@ -149,9 +149,9 @@ export const QUESTIONS: Question[] = [
     axis: ['intensity', 'relation', 'world'],
     answers: [
       { text: '모든 걸 건 거대한 최종 결전의 한복판', scores: { intensity: 2 } },
-      { text: '동료와 함께 위기를 넘기며 터지는 합', scores: { intensity: 1, relation: 2 } },
+      { text: '동료와 함께 위기를 넘기며 터지는 합', scores: { relation: 2 } },
       { text: '감춰졌던 진실이 한순간에 드러나는 순간', scores: { world: 2 } },
-      { text: '인물들의 감정이 폭발하듯 터져나오는 장면', scores: { relation: 2, intensity: -1 } },
+      { text: '인물들의 감정이 폭발하듯 터져나오는 장면', scores: { relation: 1, intensity: -1 } },
     ],
   },
   {
@@ -189,7 +189,7 @@ export const QUESTIONS: Question[] = [
       { text: '모든 걸 쏟아낸 거대한 최종 결전 뒤의 승리', scores: { intensity: 2 } },
       { text: '함께한 동료들과 웃으며 맞이하는 마무리', scores: { relation: 2 } },
       { text: '긴 여정 끝에 드러나는 세계의 진실과 새로운 시작', scores: { world: 2 } },
-      { text: '별다른 사건 없이 잔잔하게 마무리되는 일상', scores: { intensity: -2 } },
+      { text: '별다른 사건 없이 잔잔하게 마무리되는 일상', scores: { intensity: -2, world: -1 } },
     ],
   },
   {
@@ -201,7 +201,7 @@ export const QUESTIONS: Question[] = [
       { text: '끝까지 살아남은 자의 벅찬 승리의 순간', scores: { intensity: 2, relation: -1 } },
       { text: '함께 걸어온 이들과 나누는 마지막 인사', scores: { relation: 2 } },
       { text: '모든 떡밥이 회수되며 드러나는 세계의 전모', scores: { world: 2 } },
-      { text: '주인공 혼자 조용히 써 내려가는 마지막 페이지', scores: { relation: -2 } },
+      { text: '주인공 혼자 조용히 써 내려가는 마지막 페이지', scores: { relation: -2, intensity: -2 } },
     ],
   },
   {
@@ -227,7 +227,7 @@ export const QUESTIONS: Question[] = [
       { text: '"심장이 아직도 두근거린다, 다음 화는 언제 나오지"', scores: { intensity: 2 } },
       { text: '"이 동료들이랑 더 오래 함께하고 싶었는데"', scores: { relation: 2 } },
       { text: '"이 세계관, 더 깊이 파고들고 싶다"', scores: { world: 2 } },
-      { text: '"마음이 편안해지네, 잠깐 이대로 있고 싶다"', scores: { intensity: -2 } },
+      { text: '"마음이 편안해지네, 잠깐 이대로 있고 싶다"', scores: { intensity: -2, world: -1 } },
     ],
   },
   {
@@ -251,7 +251,7 @@ export const QUESTIONS: Question[] = [
       { text: '"그 전투 장면 진짜 미쳤더라"', scores: { intensity: 2 } },
       { text: '"그 둘 케미 봤어? 진짜 못 참겠더라"', scores: { relation: 2 } },
       { text: '"그 세계관 설정 너무 신선하지 않아?"', scores: { world: 2 } },
-      { text: '"그냥… 보고 나니까 마음이 편안해지더라"', scores: { intensity: -2 } },
+      { text: '"그냥… 보고 나니까 마음이 편안해지더라"', scores: { intensity: -2, world: -1 } },
     ],
   },
 ]
