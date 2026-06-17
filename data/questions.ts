@@ -99,7 +99,7 @@ export const QUESTIONS: Question[] = [
       { text: '"다음 화에 무슨 일이 벌어질지 심장이 뛴다"', scores: { intensity: 2 } },
       { text: '"이 인물들 관계가 앞으로 어떻게 될지 궁금하다"', scores: { relation: 2 } },
       { text: '"이 세계는 대체 어떤 곳일지 궁금해진다"', scores: { world: 2 } },
-      { text: '"그냥 편안하게 계속 보고 싶은 분위기다"', scores: { intensity: -2, world: -1 } },
+      { text: '"그냥 편안하게 계속 보고 싶은 분위기다"', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
 
@@ -113,7 +113,7 @@ export const QUESTIONS: Question[] = [
       { text: '한 치 앞도 예측할 수 없이 몰아치는 사건들', scores: { intensity: 2 } },
       { text: '동료들과 부딪히고 화해하며 단단해지는 관계', scores: { relation: 2 } },
       { text: '조금씩 드러나는 세계관의 비밀', scores: { world: 2 } },
-      { text: '큰 사건 없이 잔잔하게 쌓이는 일상의 결', scores: { intensity: -2, world: -1 } },
+      { text: '큰 사건 없이 잔잔하게 쌓이는 일상의 결', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
   {
@@ -151,7 +151,7 @@ export const QUESTIONS: Question[] = [
       { text: '모든 걸 건 거대한 최종 결전의 한복판', scores: { intensity: 2 } },
       { text: '동료와 함께 위기를 넘기며 터지는 합', scores: { relation: 2 } },
       { text: '감춰졌던 진실이 한순간에 드러나는 순간', scores: { world: 2 } },
-      { text: '인물들의 감정이 폭발하듯 터져나오는 장면', scores: { relation: 1, intensity: -1 } },
+      { text: '인물들의 감정이 폭발하듯 터져나오는 장면', scores: { intensity: -1 } },
     ],
   },
   {
@@ -163,7 +163,7 @@ export const QUESTIONS: Question[] = [
       { text: '압도적인 힘으로 모든 걸 쓸어버리는 순간', scores: { intensity: 2, relation: -1 } },
       { text: '함께 쌓아온 신뢰가 결정적인 순간 빛을 발할 때', scores: { relation: 2 } },
       { text: '세계의 비밀이 맞아떨어지며 모든 게 이해되는 순간', scores: { world: 2 } },
-      { text: '거창하지 않아도 마음 깊이 와닿는 잔잔한 한마디', scores: { intensity: -2 } },
+      { text: '거창하지 않아도 마음 깊이 와닿는 잔잔한 한마디', scores: { intensity: -2, relation: -2 } },
     ],
   },
   {
@@ -189,7 +189,7 @@ export const QUESTIONS: Question[] = [
       { text: '모든 걸 쏟아낸 거대한 최종 결전 뒤의 승리', scores: { intensity: 2 } },
       { text: '함께한 동료들과 웃으며 맞이하는 마무리', scores: { relation: 2 } },
       { text: '긴 여정 끝에 드러나는 세계의 진실과 새로운 시작', scores: { world: 2 } },
-      { text: '별다른 사건 없이 잔잔하게 마무리되는 일상', scores: { intensity: -2, world: -1 } },
+      { text: '별다른 사건 없이 잔잔하게 마무리되는 일상', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
   {
@@ -213,7 +213,7 @@ export const QUESTIONS: Question[] = [
       { text: '"그 결전의 순간이 아직도 생생하다"', scores: { intensity: 2 } },
       { text: '"그 인물들의 관계가 계속 마음에 남는다"', scores: { relation: 2 } },
       { text: '"그 세계가 아직도 머릿속에 펼쳐진다"', scores: { world: 2 } },
-      { text: '"그냥 마음이 따뜻해지는 잔잔한 기분이 남는다"', scores: { intensity: -2, world: -1 } },
+      { text: '"그냥 마음이 따뜻해지는 잔잔한 기분이 남는다"', scores: { intensity: -2, world: -1, relation: -1 } },
     ],
   },
 
@@ -227,7 +227,7 @@ export const QUESTIONS: Question[] = [
       { text: '"심장이 아직도 두근거린다, 다음 화는 언제 나오지"', scores: { intensity: 2 } },
       { text: '"이 동료들이랑 더 오래 함께하고 싶었는데"', scores: { relation: 2 } },
       { text: '"이 세계관, 더 깊이 파고들고 싶다"', scores: { world: 2 } },
-      { text: '"마음이 편안해지네, 잠깐 이대로 있고 싶다"', scores: { intensity: -2, world: -1 } },
+      { text: '"마음이 편안해지네, 잠깐 이대로 있고 싶다"', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
   {
@@ -239,7 +239,7 @@ export const QUESTIONS: Question[] = [
       { text: '못지않게 강렬한 전투와 박진감 넘치는 작품', scores: { intensity: 2 } },
       { text: '비슷한 매력의 인물 관계가 담긴 작품', scores: { relation: 2 } },
       { text: '새로운 세계관을 탐험할 수 있는 작품', scores: { world: 2 } },
-      { text: '잔잔하게 마음을 쉬게 해줄 수 있는 작품', scores: { intensity: -2, world: -1 } },
+      { text: '잔잔하게 마음을 쉬게 해줄 수 있는 작품', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
   {
@@ -251,7 +251,7 @@ export const QUESTIONS: Question[] = [
       { text: '"그 전투 장면 진짜 미쳤더라"', scores: { intensity: 2 } },
       { text: '"그 둘 케미 봤어? 진짜 못 참겠더라"', scores: { relation: 2 } },
       { text: '"그 세계관 설정 너무 신선하지 않아?"', scores: { world: 2 } },
-      { text: '"그냥… 보고 나니까 마음이 편안해지더라"', scores: { intensity: -2, world: -1 } },
+      { text: '"그냥… 보고 나니까 마음이 편안해지더라"', scores: { intensity: -2, world: -1, relation: -2 } },
     ],
   },
 ]
