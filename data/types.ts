@@ -15,7 +15,7 @@ export type ResultType = {
   key: string // 'HRF' 등 3글자 키
   name: string // 표시 이름
   quote: string // 공유용 한 줄 설명
-  works: Work[] // 추천 작품 (최대 4개)
+  works: Work[] // 추천 작품 풀 (7개, 세션마다 4개 노출)
   statBars: StatBar[] // 스탯 바 표시값 (0~100)
 }
 
@@ -52,6 +52,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         reason: '동료와의 유대 속에서 단단해지는 주인공의 성장',
         coverUrl: 'https://cdn.myanimelist.net/images/manga/3/179023.jpg',
         tags: ['#액션', '#판타지', '#시대극'],
+      },
+      {
+        title: '나루토',
+        author: '기시모토 마사시',
+        reason: '낙오자에서 최강으로 성장하는 닌자의 이야기, 동료와의 유대가 모든 것의 뿌리',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/117681.jpg',
+        tags: ['#액션', '#모험', '#소년'],
+      },
+      {
+        title: '블리치',
+        author: '쿠보 타이토',
+        reason: '동료를 지키기 위해 한계를 넘어서는 사신 판타지, 박력 넘치는 전투와 성장의 카타르시스',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/180031.jpg',
+        tags: ['#액션', '#초자연', '#소년'],
+      },
+      {
+        title: '페어리 테일',
+        author: '마시마 히로',
+        reason: '길드 동료들과의 유대가 모든 것의 중심인 마법 판타지 모험',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/198604.jpg',
+        tags: ['#액션', '#판타지', '#소년'],
       },
     ],
     statBars: [
@@ -94,6 +115,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         coverUrl: 'https://cdn.myanimelist.net/images/manga/2/204842.jpg',
         tags: ['#액션', '#코미디', '#초능력'],
       },
+      {
+        title: '무직전생',
+        author: '리후진나마고테',
+        reason: '전생 후 천재적 마법 능력으로 거침없이 성장하는 이세계 먼치킨 판타지',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/181049.jpg',
+        tags: ['#판타지', '#이세계', '#환생'],
+      },
+      {
+        title: '마법과고교의 열등생',
+        author: '사토 츠토무',
+        reason: '압도적 능력을 숨긴 주인공이 마법 학원에서 혼자 모든 위기를 처리하는 솔로 먼치킨 판타지',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/62151.jpg',
+        tags: ['#액션', '#판타지', '#학원'],
+      },
+      {
+        title: '소드 아트 온라인',
+        author: '카와하라 레키',
+        reason: '가상 판타지 세계에서 독보적인 실력으로 위기를 돌파하는 솔로 스타일 게임 판타지',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/280994.jpg',
+        tags: ['#액션', '#판타지', '#이세계'],
+      },
     ],
     statBars: [
       { label: '강도', value: 90 },
@@ -134,6 +176,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         reason: '인연을 통해 성장하는 인물들의 감정이 진하게 그려진 작품',
         coverUrl: 'https://cdn.myanimelist.net/images/manga/3/102691.jpg',
         tags: ['#드라마', '#음악', '#학원'],
+      },
+      {
+        title: '나나',
+        author: '야자와 아이',
+        reason: '두 나나의 엇갈린 삶과 우정, 현실 배경에서 폭발하는 감정과 복잡한 관계의 드라마',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/262324.jpg',
+        tags: ['#드라마', '#로맨스', '#음악'],
+      },
+      {
+        title: '도쿄 구울',
+        author: '이시다 스이',
+        reason: '현실과 맞닿은 배경에서 관계와 정체성이 충돌하며 터지는 강렬한 감정선',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/114037.jpg',
+        tags: ['#액션', '#드라마', '#심리'],
+      },
+      {
+        title: '20세기 소년',
+        author: '우라사와 나오키',
+        reason: '현실 배경, 오랜 인연으로 이어진 인물들의 감정이 이야기의 뼈대인 서사',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/5/260006.jpg',
+        tags: ['#미스터리', '#드라마', '#SF'],
       },
     ],
     statBars: [
@@ -176,6 +239,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         coverUrl: 'https://cdn.myanimelist.net/images/manga/3/210341.jpg',
         tags: ['#액션', '#초자연', '#학원'],
       },
+      {
+        title: '라이어 게임',
+        author: '마츠이 유우세이',
+        reason: '심리전과 두뇌 싸움만이 유일한 무기인 현실 배경 게임 스릴러',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/149018.jpg',
+        tags: ['#두뇌게임', '#전략', '#심리'],
+      },
+      {
+        title: 'ONE OUTS',
+        author: '우라타 타카시',
+        reason: '야구를 무대로 한 극한 심리전과 두뇌 싸움, 개인의 두뇌로 모든 걸 뒤집는 카타르시스',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/169329.jpg',
+        tags: ['#스포츠', '#두뇌게임', '#심리'],
+      },
+      {
+        title: '빈란드 사가',
+        author: '유키무라 마코토',
+        reason: '역사 배경, 화려한 전투보다 내면의 싸움과 개인의 선택이 중심인 강렬한 서사',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/131815.jpg',
+        tags: ['#액션', '#드라마', '#역사'],
+      },
     ],
     statBars: [
       { label: '강도', value: 80 },
@@ -216,6 +300,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         reason: '이국적인 세계관 속에 담긴 따뜻한 인연의 기록',
         coverUrl: 'https://cdn.myanimelist.net/images/manga/2/188950.jpg',
         tags: ['#로맨스', '#시대극', '#청년'],
+      },
+      {
+        title: '나츠메 우인장',
+        author: '미도리카와 유키',
+        reason: '요괴 세계와 인간 세계를 오가며 조용히 쌓이는 인연들, 프리렌과 결이 가장 가까운 잔잔한 판타지',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/260099.jpg',
+        tags: ['#판타지', '#초자연', '#힐링'],
+      },
+      {
+        title: 'Fruits Basket',
+        author: '다카야 나츠키',
+        reason: '십이지 저주라는 판타지 설정 위에 피어나는 따뜻한 관계와 치유의 이야기',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/269697.jpg',
+        tags: ['#판타지', '#로맨스', '#드라마'],
+      },
+      {
+        title: 'Aria',
+        author: '아미아노 코스모스',
+        reason: '테라포밍된 화성이라는 공상 세계를 배경으로 소소한 일상과 인연을 담아내는 힐링 판타지',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/202644.jpg',
+        tags: ['#판타지', '#SF', '#힐링'],
       },
     ],
     statBars: [
@@ -258,6 +363,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         coverUrl: 'https://cdn.myanimelist.net/images/manga/2/209665.jpg',
         tags: ['#판타지', '#이세계', '#전략'],
       },
+      {
+        title: '마기',
+        author: '오타카 시노부',
+        reason: '아라비안나이트 기반의 풍부한 판타지 세계관, 독자적인 마법 체계와 정치 구조가 파고드는 재미',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/282487.jpg',
+        tags: ['#액션', '#모험', '#판타지'],
+      },
+      {
+        title: '이세계 식당',
+        author: '이누가미 준페이',
+        reason: '현세와 이세계를 잇는 식당이라는 독특한 세계관, 잔잔한 에피소드 속에서 세계의 디테일을 즐기는 작품',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/197609.jpg',
+        tags: ['#판타지', '#이세계', '#요리'],
+      },
+      {
+        title: 'Re:Zero',
+        author: '나가츠키 탓페이',
+        reason: '반복 사망이라는 독특한 시스템과 정교하게 설계된 판타지 세계관을 파고드는 재미',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/129447.jpg',
+        tags: ['#판타지', '#이세계', '#심리'],
+      },
     ],
     statBars: [
       { label: '강도', value: 25 },
@@ -299,6 +425,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         coverUrl: 'https://cdn.myanimelist.net/images/manga/3/219711.jpg',
         tags: ['#드라마', '#일상', '#소녀'],
       },
+      {
+        title: '3월의 라이온',
+        author: '우미노 치카',
+        reason: '고독한 주인공이 주변 인물들과의 관계 속에서 천천히 온기를 되찾는 현실 힐링 드라마',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/52283.jpg',
+        tags: ['#드라마', '#일상', '#힐링'],
+      },
+      {
+        title: '치하야후루',
+        author: '스에츠구 유키',
+        reason: '현실 배경에서 오랜 인연과 우정이 이야기를 이끄는 잔잔하면서도 뭉클한 청춘 만화',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/245072.jpg',
+        tags: ['#스포츠', '#드라마', '#학원'],
+      },
+      {
+        title: '사랑은 비가 갠 뒤처럼',
+        author: '마유즈키 준',
+        reason: '일상적 배경에서 피어나는 소소한 감정의 설렘과 인연, 과하지 않은 잔잔한 밀도',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/154544.jpg',
+        tags: ['#드라마', '#로맨스', '#일상'],
+      },
     ],
     statBars: [
       { label: '강도', value: 20 },
@@ -339,6 +486,27 @@ export const RESULT_TYPES: Record<string, ResultType> = {
         reason: '현실적인 갈등 속에서 드러나는 인간에 대한 깊은 통찰',
         coverUrl: 'https://cdn.myanimelist.net/images/manga/2/188928.jpg',
         tags: ['#액션', '#SF', '#심리'],
+      },
+      {
+        title: '블루 피리어드',
+        author: '야마구치 타로',
+        reason: '미술에 눈뜬 청년의 이야기, 현실 배경에서 자신을 발견해가는 섬세한 성장 드라마',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/3/258991.jpg',
+        tags: ['#드라마', '#학원', '#예술'],
+      },
+      {
+        title: '피아노의 숲',
+        author: '카이바치 마코토',
+        reason: '재능이 다른 두 피아니스트의 현실적인 성장기, 개인의 내면과 운명을 담담하게 그린 작품',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/1/263148.jpg',
+        tags: ['#드라마', '#음악', '#성장'],
+      },
+      {
+        title: '빙과',
+        author: '호노부 요네자와 원작',
+        reason: '현실 배경의 잔잔한 일상 미스터리, 별것 아닌 일상 속에서 자신의 내면을 천천히 들여다보는 청춘 이야기',
+        coverUrl: 'https://cdn.myanimelist.net/images/manga/2/162612.jpg',
+        tags: ['#미스터리', '#일상', '#학원'],
       },
     ],
     statBars: [

@@ -55,3 +55,7 @@ export function trackQuizSkip(step: number, questionId: number, questionTimeSpen
     question_time_spent: questionTimeSpentSeconds,
   })
 }
+
+export function trackTopWorkImpression(workTitle: string, rotationPeriod: number) {
+  sendEvent('top_work_impression', { work_title: workTitle, rotation_period: rotationPeriod })
+}

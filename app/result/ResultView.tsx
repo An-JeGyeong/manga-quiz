@@ -9,20 +9,24 @@ import MascotCharacter from '@/components/MascotCharacter'
 import ResultSkeleton from '@/components/ResultSkeleton'
 import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
-import { trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
+import { trackTopWorkImpression, trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
+import { pickDisplayWorks } from '@/lib/pickWorks'
 
 function FadeInImage({
   src,
   alt,
   sizes,
   objectFit = 'cover',
+  fallbackLabel,
 }: {
   src: string
   alt: string
   sizes: string
   objectFit?: 'cover' | 'contain'
+  fallbackLabel: string
 }) {
   const [loaded, setLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
 
   useEffect(() => {
@@ -32,6 +36,15 @@ function FadeInImage({
     }
   }, [])
 
+  if (hasError) {
+    // 표지 URL이 깨졌을 때 빈 박스 대신 작품명을 보여줘 화면이 비어 보이지 않게 한다
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-zinc-100 px-1.5 text-center text-[11px] font-medium leading-tight text-zinc-400">
+        {fallbackLabel}
+      </div>
+    )
+  }
+
   return (
     <Image
       ref={imgRef}
@@ -40,7 +53,7 @@ function FadeInImage({
       fill
       sizes={sizes}
       onLoad={() => setLoaded(true)}
-      onError={() => setLoaded(true)}
+      onError={() => setHasError(true)}
       className={`${objectFit === 'contain' ? 'object-contain' : 'object-cover'} transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
     />
   )
@@ -134,7 +147,13 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
     >
       {work.coverUrl && (
         <div className="relative aspect-[2/3] w-20 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
-          <FadeInImage src={work.coverUrl} alt={`${work.title} 표지`} sizes="80px" objectFit="contain" />
+          <FadeInImage
+            src={work.coverUrl}
+            alt={`${work.title} 표지`}
+            sizes="80px"
+            objectFit="contain"
+            fallbackLabel={work.title}
+          />
         </div>
       )}
       <div className="flex flex-1 flex-col gap-1">
@@ -173,12 +192,19 @@ function ResultContent() {
   const typeKey = searchParams.get('type')
   const completed = searchParams.get('completed') === 'true'
   const resultType = (typeKey && RESULT_TYPES[typeKey]) || calcType(scores)
+  const [displayWorks] = useState(() => pickDisplayWorks(resultType.works))
+  const { topWork, restWorks, rotationPeriod } = displayWorks
 
   useEffect(() => {
     // resultType 파싱이 끝난 다음 틱에 로딩 상태를 해제해 스켈레톤 → 실제 결과로 자연스럽게 전환한다
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(false)
   }, [])
+
+  useEffect(() => {
+    if (!completed && !typeKey) return
+    trackTopWorkImpression(topWork.title, rotationPeriod)
+  }, [completed, typeKey, topWork.title, rotationPeriod])
 
   function handleBack() {
     window.history.go(-1)
@@ -201,8 +227,6 @@ function ResultContent() {
   if (isLoading) {
     return <ResultSkeleton />
   }
-
-  const topWork = resultType.works[0]
 
   if (!topWork) return null
 
@@ -235,7 +259,7 @@ function ResultContent() {
       >
         {topWork.coverUrl && (
           <div className="relative aspect-[2/3] w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-            <FadeInImage src={topWork.coverUrl} alt={`${topWork.title} 표지`} sizes="96px" />
+            <FadeInImage src={topWork.coverUrl} alt={`${topWork.title} 표지`} sizes="96px" fallbackLabel={topWork.title} />
           </div>
         )}
         <div className="flex flex-col justify-center gap-1">
@@ -266,7 +290,7 @@ function ResultContent() {
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold text-zinc-900">이런 작품은 어때요?</h2>
         <div className="flex flex-col gap-3">
-          {resultType.works.slice(1).map((work, index) => (
+          {restWorks.map((work, index) => (
             <WorkCard key={work.title} work={work} index={index + 1} />
           ))}
         </div>
