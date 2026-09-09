@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "granite dev",
-    "build": "ait build",
+    "dev": "next dev",
+    "build": "next build && ait build",
     "build:toss": "cross-env BUILD_TARGET=toss ait build",
     "start": "next start",
     "lint": "eslint",
@@ -12,7 +12,7 @@
     "deploy": "ait deploy"
   },
   "dependencies": {
-    "@apps-in-toss/web-framework": "^2.6.1",
+    "@apps-in-toss/web-framework": "^3.4.0",
     "next": "16.2.7",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -27,6 +27,7 @@
     "eslint-config-next": "16.2.7",
     "husky": "^9.1.7",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@apps-in-toss/devtools": "^3.2.0"
   }
 }
