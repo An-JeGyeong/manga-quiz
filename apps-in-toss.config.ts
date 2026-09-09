@@ -8,5 +8,5 @@ export default defineConfig({
   },
 
   permissions: [],
-  webBundleDir: 'dist'
+  webBundleDir: 'dist/web'
 })

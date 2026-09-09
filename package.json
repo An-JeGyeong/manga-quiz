@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && ait build",
-    "build:toss": "cross-env BUILD_TARGET=toss ait build",
+    "build:toss": "cross-env BUILD_TARGET=toss next build && ait build",
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky",
