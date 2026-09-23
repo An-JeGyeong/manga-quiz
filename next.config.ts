@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const isTossBuild = process.env.BUILD_TARGET === 'toss';
+const isDev = process.env.NODE_ENV !== 'production';
 
 // 앱인토스 SDK 3.x WebView Origin. Access-Control-Allow-Origin은 단일 값만 허용되므로
 // 요청 Origin 헤더와 일치할 때만 해당 Origin을 그대로 돌려준다.
@@ -36,6 +37,17 @@ const nextConfig: NextConfig = {
           }));
         },
       }),
+  // next dev는 Turbopack을 쓰므로 @apps-in-toss/devtools의 unplugin(webpack/vite 전용) 대신
+  // resolve alias로 직접 SDK를 mock으로 치환한다. 프로덕션 빌드(next build)에는 적용되지 않는다.
+  ...(isDev
+    ? {
+        turbopack: {
+          resolveAlias: {
+            '@apps-in-toss/web-framework': '@apps-in-toss/devtools/mock',
+          },
+        },
+      }
+    : {}),
 };
 
 export default nextConfig;
