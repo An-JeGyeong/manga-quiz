@@ -56,7 +56,7 @@ export default function QuizPage() {
   // visibilitychange 핸들러가 중복 전송하지 않도록 막는 플래그
   const hasTrackedAbandonRef = useRef(false)
 
-  // 토스 내비게이션 바 뒤로가기 버튼 → 헤더 ← 버튼과 동일한 handleBack 호출
+  // 뒤로가기는 토스 내비게이션 바 버튼만 사용 — backEvent 구독으로 handleBack 실행
   usePageNavigation(handleBack)
 
   useEffect(() => {
@@ -163,15 +163,7 @@ export default function QuizPage() {
   return (
     <div className="mx-auto flex w-full flex-1 flex-col bg-white px-4 sm:max-w-lg lg:max-w-xl">
       <header className="flex flex-col gap-3 pt-6">
-        <div className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={handleBack}
-            aria-label="뒤로가기"
-            className="text-xl text-zinc-400 transition-colors hover:text-zinc-700"
-          >
-            ←
-          </button>
+        <div className="flex items-center justify-end">
           <span className="text-sm font-medium text-zinc-500">
             {step + 1} / {TOTAL} · {percent}%
           </span>

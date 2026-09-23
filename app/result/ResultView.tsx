@@ -11,6 +11,7 @@ import { RESULT_TYPES, type StatBar, type Work } from '@/data/types'
 import { calcType, type Scores } from '@/lib/calcResult'
 import { trackTopWorkImpression, trackWorkClick, trackWorkFeedback } from '@/lib/gtag'
 import { pickDisplayWorks } from '@/lib/pickWorks'
+import { usePageNavigation } from '@/lib/useAppNavigation'
 
 function FadeInImage({
   src,
@@ -210,6 +211,9 @@ function ResultContent() {
     window.history.go(-1)
   }
 
+  // 뒤로가기는 토스 내비게이션 바 버튼만 사용 — backEvent 구독으로 handleBack 실행
+  usePageNavigation(handleBack)
+
   if (!completed && !typeKey) {
     return (
       <div className="mx-auto flex w-full flex-1 flex-col items-center justify-center gap-4 bg-white px-4 text-center sm:max-w-lg lg:max-w-xl">
@@ -232,15 +236,7 @@ function ResultContent() {
 
   return (
     <div className="mx-auto flex w-full flex-1 flex-col gap-8 bg-white px-4 pb-12 animate-fade-in sm:max-w-lg lg:max-w-xl">
-      <header className="flex items-center gap-3 pt-6">
-        <button
-          type="button"
-          onClick={handleBack}
-          aria-label="뒤로가기"
-          className="text-xl text-zinc-400 transition-colors hover:text-zinc-700"
-        >
-          ←
-        </button>
+      <header className="flex items-center justify-end pt-6">
         <Link href="/" aria-label="홈으로 가기" className="text-xl text-zinc-400 transition-colors hover:text-zinc-700">
           ⌂
         </Link>
