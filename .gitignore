@@ -42,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 
 .granite
+
+# IDE
+.idea/
+
+# apps-in-toss 빌드 산출물
+*.ait
